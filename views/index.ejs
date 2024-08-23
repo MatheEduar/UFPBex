@@ -1,0 +1,15 @@
+<%- include("header.ejs") %>
+        <main>
+            <div>
+                <% if (locals.cursos){ %>
+                    <% cursos.forEach(curso => { %>
+                        <a href="#" class="curso"> <%= curso.nome%> </a>
+                    <% }); %>
+                <% } else { %>
+                        <h1>Sem cursos por enquanto...</h1>
+                <% } %>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
