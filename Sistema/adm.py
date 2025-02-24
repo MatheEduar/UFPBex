@@ -1,13 +1,12 @@
-import usuario
-class Adm(usuario.Usuario):
+from usuario import Usuario
+
+class Adm(Usuario):
     def __init__(self,nome,username,senha,email):
-            self.nome = nome 
-            self.username = username
-            self.senha = senha
-            self.email = email
+        super().__init__(nome, username, senha, email)
+
     def ListarUsuarios(lista):
         for users in lista:
-            print(users)
+            print(f"Nome: {users.nome}, Username: {users.username}, Email: {users.email}")
+
     def BloquearUsuario(usuario,lista):
-        #adiciona o usuario na lista de usuarios bloqueados
-        lista.push(usuario)
+        lista.append(usuario)
