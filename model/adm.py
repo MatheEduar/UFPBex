@@ -1,6 +1,6 @@
-from usuario import Usuario
+from model.user import User
 
-class Adm(Usuario):
+class Adm(User):
     def __init__(self,nome,username,email,senha):
         super().__init__(nome, username, email, senha)
 

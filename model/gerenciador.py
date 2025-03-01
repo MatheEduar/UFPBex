@@ -1,4 +1,4 @@
-import usuario
+import model.user as user
 
 def cadastrar_Usuario(lista):
     nome = input("Digite o seu nome: ")
@@ -6,7 +6,7 @@ def cadastrar_Usuario(lista):
     email = input("Digite o email do usuario: ")
     senha = input("Digite a senha do usuario: ")
 
-    novo_usuario = usuario.Usuario(nome, nick, email, senha)
+    novo_usuario = user.Usuario(nome, nick, email, senha)
     lista.append(novo_usuario)
 
     print("Usuário cadastrado com sucesso!\n")
