@@ -1,5 +1,5 @@
-from adm import Adm
-from gerenciador import cadastrar_Usuario, editar_Usuario
+from model.adm import Adm
+from model.gerenciador import cadastrar_Usuario, editar_Usuario
 
 def main():
     usuarios_cadastrados = []
