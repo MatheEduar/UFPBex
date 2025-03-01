@@ -1,9 +1,16 @@
 from model.user import User
 from service.validations import Validation
+from infra.userPersistence import UserPersistence 
 
 class ControllerUsers(User):
     def __init__(self):
         self.users = []
+        self.bd = UserPersistence("infra\data.txt")
+        data_list = self.bd.loadUsers()
+        for i in range(len(data_list)):
+            username, password = data_list[i]
+            user = User(username, password)
+            self.users.append(user)
 
     def add(self, username, password):
         validarUsuario = Validation()
@@ -12,6 +19,7 @@ class ControllerUsers(User):
 
         user = User(username, password)
         self.users.append(user)
+        self.bd.saveUsers(self.users)
         print(f"Usuário {username} adicionado com sucesso!")
 
         
