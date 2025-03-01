@@ -1,4 +1,4 @@
-from view import UserForm
+from view.userForm import UserForm
 
 def main():
     form = UserForm()

@@ -2,34 +2,35 @@ from error.exceptionPassword import ExceptionPassword
 from error.exceptionUser import ExceptionUser
 import re
 
-def validateUserName(nick):
+class Validation:
+    def __init__(self):
+        pass
 
-    if not nick:
-        raise ExceptionUser("Entrada inválida. O Nick não pode estar vazio!")
-    elif len(nick) > 12:
-        raise ExceptionUser("Entrada inválida. O Nick não pode ultrapassar 12 caracteres!")
-    elif any(char.isdigit() for char in nick):
-        raise ExceptionUser("Entrada inválida. O Nick não pode conter números!")
+    def validateUserName(self, username):
 
-    return True 
+        if not username:
+            raise ExceptionUser("Entrada inválida. O Nick não pode estar vazio!")
+        elif len(username) > 12:
+            raise ExceptionUser("Entrada inválida. O Nick não pode ultrapassar 12 caracteres!")
+        elif any(char.isdigit() for char in username):
+            raise ExceptionUser("Entrada inválida. O Nick não pode conter números!")
 
-def validatePassword(senha, nome, email):
-    if not (8 <= len(senha) <= 128):
-        raise ExceptionPassword("Entrada inválida. A senha deve ter entre 8 e 128 caracteres!")
+        return 
 
-    # Contadores para tipos de caracteres
-    tem_maiuscula = bool(re.search(r'[A-Z]', senha))
-    tem_minuscula = bool(re.search(r'[a-z]', senha))
-    tem_numero = bool(re.search(r'\d', senha))
-    tem_especial = bool(re.search(r'[!@#$%^&*()_+\-=\[\]{}|\'"]', senha))
+    def validatePassword(self, senha):
+        if not (8 <= len(senha) <= 128):
+            raise ExceptionPassword("Entrada inválida. A senha deve ter entre 8 e 128 caracteres!")
 
-    # Conta quantos tipos diferentes a senha contém
-    tipos_presentes = sum([tem_maiuscula, tem_minuscula, tem_numero, tem_especial])
-    
-    if tipos_presentes < 3:
-        raise ExceptionPassword("Entrada inválida. A senha deve conter pelo menos três dos seguintes tipos de caracteres: maiúsculas, minúsculas, números e caracteres especiais!")
+        # Contadores para tipos de caracteres
+        tem_maiuscula = bool(re.search(r'[A-Z]', senha))
+        tem_minuscula = bool(re.search(r'[a-z]', senha))
+        tem_numero = bool(re.search(r'\d', senha))
+        tem_especial = bool(re.search(r'[!@#$%^&*()_+\-=\[\]{}|\'"]', senha))
 
-    if senha.lower() in [nome.lower(), email.lower()]:
-        raise ExceptionPassword("Entrada inválida. A senha não pode ser idêntica ao nome ou ao e-mail!")
+        # Conta quantos tipos diferentes a senha contém
+        tipos_presentes = sum([tem_maiuscula, tem_minuscula, tem_numero, tem_especial])
 
-    return True 
+        if tipos_presentes < 3:
+            raise ExceptionPassword("Entrada inválida. A senha deve conter pelo menos três dos seguintes tipos de caracteres: maiúsculas, minúsculas, números e caracteres especiais!")
+
+        return 
