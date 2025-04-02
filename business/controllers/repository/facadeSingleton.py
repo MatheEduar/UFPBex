@@ -1,7 +1,9 @@
+from repositoryFactory import RepositoryFactory
+from model.user import User
 class FacadeSingleton:
     _instance = None
 
-    def new(cls):
+    def new(self,cls):
         if cls._instance is None:
             cls._instance = super(FacadeSingleton, cls).new(cls)
             cls._instance.repository = RepositoryFactory.create_user_repository()
