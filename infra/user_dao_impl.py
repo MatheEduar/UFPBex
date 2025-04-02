@@ -1,5 +1,5 @@
 from infra.user_dao import UserDAO
-from model.user import User
+from business.model.user import User
 
 class UserDAOImpl(UserDAO):
     def __init__(self, file_path="infra/data.txt"):

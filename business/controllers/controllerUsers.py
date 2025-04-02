@@ -5,7 +5,7 @@ from infra.user_dao_impl import UserDAOImpl
 class ControllerUsers:
     def __init__(self):
         self.dao = UserDAOImpl()
-        self.validarUsuario = Validation()
+        self.validar_usuario = Validation()
 
     def add(self, username, password):
         self.validarUsuario.validateUserName(username)
