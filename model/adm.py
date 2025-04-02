@@ -1,12 +1,16 @@
 from model.user import User
 
 class Adm(User):
-    def __init__(self,nome,username,email,senha):
-        super().__init__(nome, username, email, senha)
+    def __init__(self, username, password):
+        super().__init__(username, password)
 
-    def ListarUsuarios(self,lista):
-        for users in lista:
-            print(f"Nome: {users.nome}, Username: {users.username}, Email: {users.email}")
+    def listar_usuarios(self, controller):
+        controller.listAll()
 
-    def BloquearUsuario(self,usuario,lista):
-        lista.append(usuario)
+    def bloquear_usuario(self, controller, username):
+        user = controller.listUser(username)
+        if user:
+            # Lógica para bloquear o usuário (pode envolver adicionar a uma lista de bloqueados, etc.)
+            print(f"Usuário {username} bloqueado.")
+        else:
+            print("Usuário não encontrado.")

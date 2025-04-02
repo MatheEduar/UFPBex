@@ -1,55 +1,40 @@
 from model.user import User
 from service.validations import Validation
-from infra.userPersistence import UserPersistence 
+from infra.user_dao_impl import UserDAOImpl
 
-class ControllerUsers(User):
+class ControllerUsers:
     def __init__(self):
-        self.users = []
-        self.bd = UserPersistence("infra\data.txt")
-        data_list = self.bd.loadUsers()
-        for i in range(len(data_list)):
-            username, password = data_list[i]
-            user = User(username, password)
-            self.users.append(user)
+        self.dao = UserDAOImpl()
+        self.validarUsuario = Validation()
 
     def add(self, username, password):
-        validarUsuario = Validation()
-        validarUsuario.validateUserName(username)
-        validarUsuario.validatePassword(password)
+        self.validarUsuario.validateUserName(username)
+        self.validarUsuario.validatePassword(password)
 
         user = User(username, password)
-        self.users.append(user)
-        self.bd.saveUsers(self.users)
+        self.dao.create_user(user)
         print(f"Usuário {username} adicionado com sucesso!")
 
-        
-
     def listUser(self, username):
-        for user in self.users:
-            if(user.username == username):
-                return username
-            else: 
-                return "Usuário não encontrado!"
-        
+        return self.dao.get_user_by_username(username)
 
     def listAll(self):
-        for user in self.users:
+        users = self.dao.get_all_users()
+        for user in users:
             print(user.username)
 
     def editUser(self, username, userChange):
-        for user in self.users:
-            if(username == user.username):
-                user.username = userChange
-                print(f"Usuário {username} alterado para {userChange} com sucesso!")
-            else:
-                print("Usuário não encontrado!")
-
+        user = self.dao.get_user_by_username(username)
+        if user:
+            user.username = userChange
+            self.dao.update_user(user)
+            print(f"Usuário {username} alterado para {userChange} com sucesso!")
+        else:
+            print("Usuário não encontrado!")
 
     def deleteUser(self, username):
-        for user in self.users:
-            if(username == user.username):
-                self.users.remove(user)
-                print(f"Usuário {username} deletado com sucesso!")
-            else:
-                print("Usuário não encontrado!")
-        
+        try:
+            self.dao.delete_user(username)
+            print(f"Usuário {username} deletado com sucesso!")
+        except ValueError:
+            print("Usuário não encontrado!")

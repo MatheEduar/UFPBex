@@ -15,8 +15,6 @@ class Validation:
         elif any(char.isdigit() for char in username):
             raise ExceptionUser("Entrada inválida. O Nick não pode conter números!")
 
-        return 
-
     def validatePassword(self, senha):
         if not (8 <= len(senha) <= 128):
             raise ExceptionPassword("Entrada inválida. A senha deve ter entre 8 e 128 caracteres!")
@@ -32,5 +30,3 @@ class Validation:
 
         if tipos_presentes < 3:
             raise ExceptionPassword("Entrada inválida. A senha deve conter pelo menos três dos seguintes tipos de caracteres: maiúsculas, minúsculas, números e caracteres especiais!")
-
-        return 

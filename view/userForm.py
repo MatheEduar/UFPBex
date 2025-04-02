@@ -1,15 +1,15 @@
 from controllers.controllerUsers import ControllerUsers
+from error.exceptionUser import ExceptionUser
+from error.exceptionPassword import ExceptionPassword
 
-class UserForm():
+class UserForm:
     def __init__(self):
-        pass
-
+        self.gerenciador = ControllerUsers()
 
     def menu(self):
-        gerenciador = ControllerUsers()
         opcao = 0
 
-        while(opcao != 6):
+        while opcao != 6:
             opcao = int(input('''===== UFPBex =====\n
 1) Cadastrar Usuário.
 2) Mostrar Usuário.
@@ -18,35 +18,44 @@ class UserForm():
 5) Deletar Usuário.
 6) Sair do programa.\n
 > '''))
-            if(opcao == 1):
-                self.cadastrar_usuario(gerenciador)
-            elif(opcao == 2):
-                self.mostrar_usuario(gerenciador)
-            elif(opcao == 3):
-                self.listar_todos(gerenciador)
-            elif(opcao == 4):
-                self.editar_usuario(gerenciador)
-            elif(opcao == 5):
-                self.deletar_usuario(gerenciador)
 
-    
-    def cadastrar_usuario(self, gerenciador):
+            if opcao == 1:
+                self.cadastrar_usuario()
+            elif opcao == 2:
+                self.mostrar_usuario()
+            elif opcao == 3:
+                self.listar_todos()
+            elif opcao == 4:
+                self.editar_usuario()
+            elif opcao == 5:
+                self.deletar_usuario()
+
+    def cadastrar_usuario(self):
         username = input("Digite o username: ")
         password = input("Digite a password: ")
-        gerenciador.add(username, password)
+        try:
+            self.gerenciador.add(username, password)
+        except ExceptionUser as e:
+            print(f"Erro ao cadastrar usuário: {e}")
+        except ExceptionPassword as e:
+            print(f"Erro ao cadastrar usuário: {e}")
 
-    def mostrar_usuario(self, gerenciador):
+    def mostrar_usuario(self):
         username = input("Digite o usuário que deseja mostrar: ")
-        print(gerenciador.listUser(username))
+        user = self.gerenciador.listUser(username)
+        if user:
+            print(f"Username: {user.username}, Password: {user.password}")
+        else:
+            print("Usuário não encontrado.")
 
-    def listar_todos(self, gerenciador):
-        gerenciador.listAll()
+    def listar_todos(self):
+        self.gerenciador.listAll()
 
-    def editar_usuario(self, gerenciador):
+    def editar_usuario(self):
         username = input("Digite o nome do usuário que deseja alterar: ")
         userChange = input("Digite o novo nome: ")
-        gerenciador.editUser(username, userChange)
+        self.gerenciador.editUser(username, userChange)
 
-    def deletar_usuario(self, gerenciador):
+    def deletar_usuario(self):
         username = input("Digite o nome do usuário que deseja deletar: ")
-        gerenciador.deleteUser(username)
+        self.gerenciador.deleteUser(username)
