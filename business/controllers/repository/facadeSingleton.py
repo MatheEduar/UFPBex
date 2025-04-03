@@ -1,30 +1,53 @@
 from .repositoryFactory import RepositoryFactory
 from business.model.user import User
+from business.model.curso import Curso
 
 class FacadeSingleton:
     _instance = None
+    user_repository = None
+    curso_repository = None
 
-    def __new__(cls): # correção do método
-        if cls._instance is None:
-            cls._instance = super(FacadeSingleton, cls).__new__(cls)
-            cls._instance.repository = RepositoryFactory.create_user_repository()
-        return cls._instance
+    def __new__(self):
+        if FacadeSingleton._instance is None:
+            FacadeSingleton._instance = super(FacadeSingleton, self).__new__(self)
+            FacadeSingleton.user_repository = RepositoryFactory.create_user_repository()
+            FacadeSingleton.curso_repository = RepositoryFactory.create_curso_repository()
+        return FacadeSingleton._instance
 
     def add_user(self, username, password):
         user = User(username, password)
-        self._instance.repository.create_user(user)
+        FacadeSingleton.user_repository.create_user(user)
 
     def get_user(self, username):
-        return self._instance.repository.get_user_by_username(username)
+        return FacadeSingleton.user_repository.get_user_by_username(username)
 
     def get_all_users(self):
-        return self._instance.repository.get_all_users()
+        return FacadeSingleton.user_repository.get_all_users()
 
     def update_user(self, username, userChange):
-        user = self._instance.repository.get_user_by_username(username)
+        user = FacadeSingleton.user_repository.get_user_by_username(username)
         if user:
             user.username = userChange
-            self._instance.repository.update_user(user)
+            FacadeSingleton.user_repository.update_user(user)
 
     def delete_user(self, username):
-        self._instance.repository.delete_user(username)
+        FacadeSingleton.user_repository.delete_user(username)
+
+    def add_curso(self, nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito):
+        curso = Curso(nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito)
+        FacadeSingleton.curso_repository.create_curso(curso)
+
+    def get_curso(self, codigo):
+        return FacadeSingleton.curso_repository.get_curso_by_codigo(codigo)
+
+    def get_all_cursos(self):
+        return FacadeSingleton.curso_repository.get_all_cursos()
+
+    def update_curso(self, codigo, curso_change):
+        curso = FacadeSingleton.curso_repository.get_curso_by_codigo(codigo)
+        if curso:
+            curso.nome = curso_change
+            FacadeSingleton.curso_repository.update_curso(curso)
+
+    def delete_curso(self, codigo):
+        FacadeSingleton.curso_repository.delete_curso(codigo)

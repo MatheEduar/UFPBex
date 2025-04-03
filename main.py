@@ -1,8 +1,13 @@
+from view.cursoForm import CursoForm
 from view.userForm import UserForm
 
 def main():
-    form = UserForm()
-    form.menu()
+    #formUser = UserForm()
+    #formUser.menu()
+    formCurso = CursoForm()
+    formCurso.menu()
+
+
 
 if __name__ == "__main__":
     main()
