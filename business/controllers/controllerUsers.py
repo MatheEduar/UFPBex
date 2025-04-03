@@ -1,11 +1,13 @@
-from model.user import User
+from business.model.user import User
 from service.validations import Validation
 from infra.user_dao import UserDAO
+from business.controllers.repository.facadeSingleton import FacadeSingleton
 
 class ControllerUsers:
-    def init(self):
+    def __init__(self, dao: UserDAO):
         self.facade = FacadeSingleton()
-
+        self.dao = dao 
+      
     def add(self, username, password):
         self.facade.add_user(username, password)
         print(f"Usuário {username} adicionado com sucesso!")

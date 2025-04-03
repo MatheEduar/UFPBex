@@ -1,5 +1,5 @@
 from infra.user_dao_impl import UserDAOImpl
-from model.user import User
+from business.model.user import User
 from service.validations import Validation
 from infra.userRepository import UserRepository  
 
