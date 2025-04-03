@@ -1,10 +1,10 @@
 from infra.user_dao_impl import UserDAOImpl
 from model.user import User
 from service.validations import Validation
-from userRepository import UserRepository
+from infra.userRepository import UserRepository  
 
 class UserRepositoryImpl(UserRepository):
-    def init(self):
+    def __init__(self):  
         self.dao = UserDAOImpl()
         self.validarUsuario = Validation()
 

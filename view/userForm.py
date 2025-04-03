@@ -1,10 +1,11 @@
 from business.controllers.controllerUsers import ControllerUsers
+from infra.user_dao_impl import UserDAOImpl
 from error.exceptionUser import ExceptionUser
 from error.exceptionPassword import ExceptionPassword
 
 class UserForm:
     def __init__(self):
-        self.gerenciador = ControllerUsers()
+        self.gerenciador = ControllerUsers(UserDAOImpl())
 
     def menu(self):
         opcao = 0

@@ -1,10 +1,10 @@
 from model.user import User
 from service.validations import Validation
-from infra.user_dao_impl import UserDAOImpl
+from infra.user_dao import UserDAO
 
 class ControllerUsers:
-    def __init__(self):
-        self.dao = UserDAOImpl()
+    def __init__(self, dao: UserDAO):  # Injeta a dependência no construtor
+        self.dao = dao
         self.validar_usuario = Validation()
 
     def add(self, username, password):
