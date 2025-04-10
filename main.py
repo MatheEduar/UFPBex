@@ -2,8 +2,8 @@ from view.cursoForm import CursoForm
 from view.userForm import UserForm
 
 def main():
-    #formUser = UserForm()
-    #formUser.menu()
+    formUser = UserForm()
+    formUser.menu()
     formCurso = CursoForm()
     formCurso.menu()
 
