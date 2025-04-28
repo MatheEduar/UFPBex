@@ -1,13 +1,9 @@
-from business.model.user import User
-from service.validations import Validation
-from infra.user_dao import UserDAO
 from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
 
 class ControllerUsers:
-    def __init__(self, dao: UserDAO):
+    def __init__(self):
         self.facade = FacadeSingleton()
-        self.dao = dao 
         self.log = loggerAdapter.LoggerAdapter(use_print=True)
       
     def add(self, username, password):

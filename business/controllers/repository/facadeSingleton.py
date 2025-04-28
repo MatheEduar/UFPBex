@@ -1,6 +1,6 @@
 from .repositoryFactory import RepositoryFactory
 from business.model.user import User
-from business.model.curso import Curso
+from business.model.curso_builder import CursoBuilder
 
 class FacadeSingleton:
     _instance = None
@@ -11,7 +11,7 @@ class FacadeSingleton:
         if FacadeSingleton._instance is None:
             FacadeSingleton._instance = super(FacadeSingleton, self).__new__(self)
             FacadeSingleton.user_repository = RepositoryFactory.create_user_repository()
-            FacadeSingleton.curso_repository = RepositoryFactory.create_curso_repository()
+            FacadeSingleton.curso_repository = RepositoryFactory.create_curso_repository()    
         return FacadeSingleton._instance
 
     def add_user(self, username, password):
@@ -34,7 +34,18 @@ class FacadeSingleton:
         FacadeSingleton.user_repository.delete_user(username)
 
     def add_curso(self, nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito):
-        curso = Curso(nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito)
+        curso = (CursoBuilder()
+             .com_nome(nome)
+             .com_codigo(codigo)
+             .com_area(area)
+             .com_periodos(periodos)
+             .com_carga_total(carga_horaria_total)
+             .com_carga_optativa(carga_horaria_optativa)
+             .com_carga_minima(carga_horaria_minima)
+             .com_carga_maxima(carga_horaria_maxima)
+             .com_qtd_favoritos(qtd_favorito)
+             .construir())
+        
         FacadeSingleton.curso_repository.create_curso(curso)
 
     def get_curso(self, codigo):

@@ -1,10 +1,9 @@
 from business.controllers.controllerUsers import ControllerUsers
-from infra.user_dao_impl import UserDAOImpl
 from business.Commands.UserCommands import AddUserCommand, ListAllUsersCommand, DeleteUserCommand, ShowUserCommand, EditUserCommand
 
 class UserForm:
     def __init__(self):
-        controller = ControllerUsers(UserDAOImpl())
+        controller = ControllerUsers()
         self.commands = {
             1: AddUserCommand.AddUserCommand(controller),
             2: ShowUserCommand.ShowUserCommand(controller),

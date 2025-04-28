@@ -1,12 +1,9 @@
-from business.model.curso import Curso
-from infra.curso_dao import CursoDAO
 from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
 
 class ControllerCursos:
-    def __init__(self, dao: CursoDAO):
+    def __init__(self):
         self.facade = FacadeSingleton()
-        self.dao = dao
         self.log = loggerAdapter.LoggerAdapter(use_print=True)
 
     def add(self, nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito):

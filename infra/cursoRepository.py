@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from business.model.curso import Curso
 
 class CursoRepository(ABC):
     @abstractmethod

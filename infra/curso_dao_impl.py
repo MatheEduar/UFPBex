@@ -1,5 +1,5 @@
 from infra.curso_dao import CursoDAO
-from business.model.curso import Curso
+from business.model.curso_builder import CursoBuilder
 
 class CursoDAOImpl(CursoDAO):
     def __init__(self, file_path="infra/cursos.txt"):
@@ -10,10 +10,27 @@ class CursoDAOImpl(CursoDAO):
         try:
             with open(self.file_path, 'r') as file:
                 data_list = [line.strip().split(',') for line in file]
-                cursos = [Curso(nome, codigo, area, int(periodos), int(carga_horaria_total), int(carga_horaria_optativa), int(carga_horaria_minima), int(carga_horaria_maxima), int(qtd_favorito)) for nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito in data_list]
+                cursos = [
+                    CursoBuilder()
+                        .com_nome(nome)
+                        .com_codigo(codigo)
+                        .com_area(area)
+                        .com_periodos(int(periodos))
+                        .com_carga_total(int(cargaHorariatotal))
+                        .com_carga_optativa(int(carga_horaria_optativa))
+                        .com_carga_minima(int(carga_horaria_minima))
+                        .com_carga_maxima(int(carga_horaria_maxima))
+                        .com_qtd_favoritos(int(qtd_favorito))
+                        .construir()
+                    for nome, codigo, area, periodos, cargaHorariatotal,
+                        carga_horaria_optativa, carga_horaria_minima,
+                        carga_horaria_maxima, qtd_favorito in data_list
+                ]
                 return cursos
+            
         except FileNotFoundError:
             return []
+
 
     def _save_cursos(self):
         with open(self.file_path, 'w') as file:
