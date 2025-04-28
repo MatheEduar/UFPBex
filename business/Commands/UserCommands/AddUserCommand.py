@@ -1,6 +1,6 @@
 from business.Commands.Command import Command
-from error.exceptionUser import ExceptionUser
-from error.exceptionPassword import ExceptionPassword
+from infra.error.exceptionUser import ExceptionUser
+from infra.error.exceptionPassword import ExceptionPassword
 
 class AddUserCommand(Command):
     def __init__(self, controller):
