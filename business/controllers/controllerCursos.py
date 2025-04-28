@@ -1,5 +1,6 @@
 from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
+from infra.error.dataException import DataException
 
 class ControllerCursos:
     def __init__(self):
@@ -7,8 +8,11 @@ class ControllerCursos:
         self.log = loggerAdapter.LoggerAdapter(use_print=True)
 
     def add(self, nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito):
-        self.facade.add_curso(nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito)
-        self.log.info(f"Curso {nome} adicionado com sucesso!")
+        try:
+            self.facade.add_curso(nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito)
+            self.log.info(f"Curso {nome} adicionado com sucesso!")
+        except DataException as e:
+            print(f"Erro ao cadastrar curso: {e}")
 
     def listCurso(self, codigo):
         return self.facade.get_curso(codigo)

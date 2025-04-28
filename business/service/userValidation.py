@@ -2,7 +2,7 @@ from infra.error.exceptionPassword import ExceptionPassword
 from infra.error.exceptionUser import ExceptionUser
 import re
 
-class Validation:
+class UserValidation:
     def __init__(self):
         pass
 

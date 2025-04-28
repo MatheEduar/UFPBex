@@ -1,5 +1,7 @@
 from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
+from infra.error.exceptionUser import ExceptionUser
+from infra.error.exceptionPassword import ExceptionPassword
 
 class ControllerUsers:
     def __init__(self):
@@ -7,8 +9,13 @@ class ControllerUsers:
         self.log = loggerAdapter.LoggerAdapter(use_print=True)
       
     def add(self, username, password):
-        self.facade.add_user(username, password)
-        self.log.info(f"Usuário {username} adicionado com sucesso!")
+        try:
+            self.facade.add_user(username, password)
+            self.log.info(f"Usuário {username} adicionado com sucesso!")
+        except ExceptionUser as e:
+            print(f"Erro ao cadastrar usuário: {e}")
+        except ExceptionPassword as e:
+            print(f"Erro ao cadastrar usuário: {e}")
 
     def listUser(self, username):
         return self.facade.get_user(username)
