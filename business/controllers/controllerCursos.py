@@ -1,6 +1,7 @@
 from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
 from infra.error.dataException import DataException
+from business.service.notificadores import PrintObserver, LoggerObserver
 
 class ControllerCursos:
     def __init__(self):
@@ -23,6 +24,14 @@ class ControllerCursos:
             self.log.info(f"Nome: {curso.nome}, Código: {curso.codigo}, Área: {curso.area}, Períodos: {curso.periodos}, Carga Horária Total: {curso.cargaHorariatotal}, Carga Horária Optativa: {curso.cargaHorariaOptativa}, Carga Horária Mínima: {curso.cargaHorariaMinima}, Carga Horária Máxima: {curso.cargaHorariaMaxima}, Quantidade de Favoritos: {curso.qtdFavoritos}")
 
     def editCurso(self, codigo, curso_change):
+        curso_atual = self.facade.get_curso(codigo)
+
+        curso_atual.adicionar_observador(PrintObserver())
+        curso_atual.adicionar_observador(LoggerObserver())
+
+        if curso_atual.nome != curso_change:
+            curso_atual.set_nome(curso_change)
+
         self.facade.update_curso(codigo, curso_change)
         self.log.info(f"Curso {codigo} alterado para {curso_change} com sucesso!")
 
