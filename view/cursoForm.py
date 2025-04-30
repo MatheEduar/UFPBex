@@ -1,6 +1,5 @@
 from business.controllers.controllerCursos import ControllerCursos
-# from infra.curso_dao_impl import CursoDAOImpl
-from business.Commands.CursoCommands import AddCursoCommand, ShowCursoCommand, EditCursoCommand, ListAllCursosCommand, DeleteCursoCommand
+from business.commands.CursoCommands import AddCursoCommand, ShowCursoCommand, EditCursoCommand, ListAllCursosCommand, DeleteCursoCommand
 
 class CursoForm:
     def __init__(self):

@@ -10,7 +10,7 @@ class Adm(User):
     def bloquear_usuario(self, controller, username):
         user = controller.listUser(username)
         if user:
-            # Lógica para bloquear o usuário (pode envolver adicionar a uma lista de bloqueados, etc.)
+
             print(f"Usuário {username} bloqueado.")
         else:
             print("Usuário não encontrado.")

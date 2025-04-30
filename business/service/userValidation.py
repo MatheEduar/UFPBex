@@ -19,13 +19,11 @@ class UserValidation:
         if not (8 <= len(senha) <= 128):
             raise ExceptionPassword("Entrada inválida. A senha deve ter entre 8 e 128 caracteres!")
 
-        # Contadores para tipos de caracteres
         tem_maiuscula = bool(re.search(r'[A-Z]', senha))
         tem_minuscula = bool(re.search(r'[a-z]', senha))
         tem_numero = bool(re.search(r'\d', senha))
         tem_especial = bool(re.search(r'[!@#$%^&*()_+\-=\[\]{}|\'"]', senha))
 
-        # Conta quantos tipos diferentes a senha contém
         tipos_presentes = sum([tem_maiuscula, tem_minuscula, tem_numero, tem_especial])
 
         if tipos_presentes < 3:

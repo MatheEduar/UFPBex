@@ -1,4 +1,4 @@
-from business.Commands.Command import Command
+from business.commands.Command import Command
 
 class EditCursoCommand(Command):
     def __init__(self, controller):

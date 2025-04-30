@@ -1,9 +1,9 @@
-from infra.user_dao import UserDAO
+from infra.dao.user_dao import UserDAO
 from business.model.user import User
 from business.service.userValidation import UserValidation
 
 class UserDAOImpl(UserDAO):
-    def __init__(self, file_path="infra/data.txt"):
+    def __init__(self, file_path="data/users.txt"):
         self.file_path = file_path
         self.users = self._load_users()
         self.validarUsuario = UserValidation()

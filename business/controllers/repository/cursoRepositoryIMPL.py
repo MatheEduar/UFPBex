@@ -1,6 +1,6 @@
-from infra.curso_dao_impl import CursoDAOImpl
+from infra.dao.curso_dao_impl import CursoDAOImpl
 from business.service.cursoValidation import CursoValidation
-from infra.cursoRepository import CursoRepository  
+from business.controllers.repository.cursoRepository import CursoRepository  
 
 class CursoRepositoryImpl(CursoRepository):
     def __init__(self):  

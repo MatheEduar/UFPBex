@@ -1,9 +1,9 @@
-from infra.curso_dao import CursoDAO
+from infra.dao.curso_dao import CursoDAO
 from business.model.curso_builder import CursoBuilder
 from business.service.cursoValidation import CursoValidation
 
 class CursoDAOImpl(CursoDAO):
-    def __init__(self, file_path="infra/cursos.txt"):
+    def __init__(self, file_path="data/cursos.txt"):
         self.file_path = file_path
         self.cursos = self._load_cursos()
         self.validarCurso = CursoValidation()

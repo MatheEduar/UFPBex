@@ -4,7 +4,6 @@ class LoggerAdapter:
     def __init__(self, use_print=True):
         self.use_print = use_print
 
-        # Configuração básica do logging
         logging.basicConfig(
             level=logging.INFO,
             format='[%(levelname)s] %(asctime)s - %(message)s',

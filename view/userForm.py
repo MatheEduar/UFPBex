@@ -1,5 +1,5 @@
 from business.controllers.controllerUsers import ControllerUsers
-from business.Commands.UserCommands import AddUserCommand, ListAllUsersCommand, DeleteUserCommand, ShowUserCommand, EditUserCommand
+from business.commands.UserCommands import AddUserCommand, ListAllUsersCommand, DeleteUserCommand, ShowUserCommand, EditUserCommand
 
 class UserForm:
     def __init__(self):

@@ -1,5 +1,5 @@
-from infra.user_dao_impl import UserDAOImpl
-from infra.userRepository import UserRepository  
+from infra.dao.user_dao_impl import UserDAOImpl
+from business.controllers.repository.userRepository import UserRepository  
 
 class UserRepositoryImpl(UserRepository):
     def __init__(self):  

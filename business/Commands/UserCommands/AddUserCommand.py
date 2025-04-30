@@ -1,4 +1,4 @@
-from business.Commands.Command import Command
+from business.commands.Command import Command
 from infra.error.exceptionUser import ExceptionUser
 from infra.error.exceptionPassword import ExceptionPassword
 
