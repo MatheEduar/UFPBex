@@ -13,13 +13,11 @@ class Curso:
         self._observadores = []
 
     def adicionar_observador(self, observador):
-        self._observadores.append(observador)
+        if observador not in self._observadores:
+            self._observadores.append(observador)
+
+        print(len(self._observadores))    
 
     def notificar_observadores(self, mensagem):
         for o in self._observadores:
             o.atualizar(mensagem)
-
-    def set_nome(self, novo_nome):
-        antigo = self.nome
-        self.nome = novo_nome
-        self.notificar_observadores(f"Nome do curso alterado de '{antigo}' para '{novo_nome}'")

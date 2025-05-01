@@ -19,9 +19,9 @@ class CursoRepositoryImpl(CursoRepository):
         self.caretaker.backup()
         self.dao.create_curso(curso)
 
-    def update_curso(self, curso):
+    def update_curso(self, curso, curso_change):
         self.caretaker.backup()
-        self.dao.update_curso(curso)
+        self.dao.update_curso(curso, curso_change)
 
     def delete_curso(self, codigo):
         self.caretaker.backup()

@@ -63,10 +63,10 @@ class CursoDAOImpl(CursoDAO):
         self.cursos.append(curso)
         self._save_cursos()
 
-    def update_curso(self, curso):
+    def update_curso(self, curso, curso_change):
         for i, existing_curso in enumerate(self.cursos):
             if existing_curso.codigo == curso.codigo:
-                self.cursos[i] = curso
+                self.cursos[i].nome = curso_change
                 self._save_cursos()
                 return
         raise ValueError("Curso não encontrado")

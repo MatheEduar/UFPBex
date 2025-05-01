@@ -57,8 +57,7 @@ class FacadeSingleton:
     def update_curso(self, codigo, curso_change):
         curso = FacadeSingleton.curso_repository.get_curso_by_codigo(codigo)
         if curso:
-            curso.nome = curso_change
-            FacadeSingleton.curso_repository.update_curso(curso)
+            FacadeSingleton.curso_repository.update_curso(curso, curso_change)
 
     def delete_curso(self, codigo):
         FacadeSingleton.curso_repository.delete_curso(codigo)

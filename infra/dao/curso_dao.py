@@ -14,7 +14,7 @@ class CursoDAO(ABC):
         pass
 
     @abstractmethod
-    def update_curso(self, curso):
+    def update_curso(self, curso, curso_change):
         pass
 
     @abstractmethod
