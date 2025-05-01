@@ -1,7 +1,7 @@
 from infra.dao.curso_dao import CursoDAO
 from business.model.curso_builder import CursoBuilder
-from business.service.cursoValidation import CursoValidation
-from infra.memento.cursosMemento import CursoMemento
+from business.service.curso_validation import CursoValidation
+from infra.memento.cursos_memento import CursoMemento
 import copy
 
 class CursoDAOImpl(CursoDAO):

@@ -1,13 +1,13 @@
-from business.controllers.repository.facadeSingleton import FacadeSingleton
-from business.report import loggerAdapter
-from infra.error.dataException import DataException
+from business.controllers.repository.facade_singleton import FacadeSingleton
+from business.report import logger_adapter
+from infra.error.data_exception import DataException
 from business.service.notificadores import PrintObserver, LoggerObserver
 import datetime
 
 class ControllerCursos:
     def __init__(self):
         self.facade = FacadeSingleton()
-        self.log = loggerAdapter.LoggerAdapter(use_print=True)
+        self.log = logger_adapter.LoggerAdapter(use_print=True)
         self.observerLog = LoggerObserver()
         self.observerPrint = PrintObserver()
 
@@ -34,7 +34,7 @@ class ControllerCursos:
     def listAll(self):
         cursos = self.facade.get_all_cursos()
         for curso in cursos:
-            self.log.info(f"Nome: {curso.nome}, Código: {curso.codigo}, Área: {curso.area}, Períodos: {curso.periodos}, Carga Horária Total: {curso.cargaHorariatotal}, Carga Horária Optativa: {curso.cargaHorariaOptativa}, Carga Horária Mínima: {curso.cargaHorariaMinima}, Carga Horária Máxima: {curso.cargaHorariaMaxima}, Quantidade de Favoritos: {curso.qtdFavoritos}")
+            self.log.info(f"Nome: {curso.nome}, Código: {curso.codigo}, Área: {curso.area}, Períodos: {curso.periodos}, Carga Horária Total: {curso.cargaHorariatotal}, Carga Horária Optativa: {curso.cargaHorariaOptativa}, Carga Horária Mínima: {curso.cargaHorariaMinima}, Carga Horária Máxima: {curso.cargaHorariaMaxima}, Quantidade de Favoritos: {curso.qtdFavoritos}\n")
 
     def editCurso(self, codigo, curso_change):
         curso_atual = self.cursoObservers(codigo)

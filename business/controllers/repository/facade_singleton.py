@@ -1,4 +1,4 @@
-from .repositoryFactory import RepositoryFactory
+from .repository_factory import RepositoryFactory
 from business.model.user import User
 from business.model.curso_builder import CursoBuilder
 

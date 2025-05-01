@@ -1,4 +1,4 @@
-from infra.error.dataException import DataException
+from infra.error.data_exception import DataException
 import re
 
 class CursoValidation:

@@ -1,4 +1,4 @@
-from business.commands.Command import Command
+from business.commands.command import Command
 
 class ListAllUsersCommand(Command):
     def __init__(self, controller):

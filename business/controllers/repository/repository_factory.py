@@ -1,5 +1,5 @@
-from .userRepositoryIMPL import UserRepositoryImpl
-from .cursoRepositoryIMPL import CursoRepositoryImpl
+from .user_repository_impl import UserRepositoryImpl
+from .curso_repository_impl import CursoRepositoryImpl
 class RepositoryFactory:
     @staticmethod
     def create_user_repository():

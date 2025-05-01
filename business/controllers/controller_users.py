@@ -1,12 +1,12 @@
-from business.controllers.repository.facadeSingleton import FacadeSingleton
-from business.report import loggerAdapter
-from infra.error.exceptionUser import ExceptionUser
-from infra.error.exceptionPassword import ExceptionPassword
+from business.controllers.repository.facade_singleton import FacadeSingleton
+from business.report import logger_adapter
+from infra.error.exception_user import ExceptionUser
+from infra.error.exception_password import ExceptionPassword
 
 class ControllerUsers:
     def __init__(self):
         self.facade = FacadeSingleton()
-        self.log = loggerAdapter.LoggerAdapter(use_print=True)
+        self.log = logger_adapter.LoggerAdapter(use_print=True)
       
     def add(self, username, password):
         try:

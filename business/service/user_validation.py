@@ -1,5 +1,5 @@
-from infra.error.exceptionPassword import ExceptionPassword
-from infra.error.exceptionUser import ExceptionUser
+from infra.error.exception_password import ExceptionPassword
+from infra.error.exception_user import ExceptionUser
 import re
 
 class UserValidation:
