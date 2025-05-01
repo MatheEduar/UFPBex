@@ -62,3 +62,6 @@ class FacadeSingleton:
 
     def delete_curso(self, codigo):
         FacadeSingleton.curso_repository.delete_curso(codigo)
+
+    def undoAction(self):
+        FacadeSingleton.curso_repository.undoAction()

@@ -20,3 +20,13 @@ class CursoDAO(ABC):
     @abstractmethod
     def delete_curso(self, codigo):
         pass
+
+    @abstractmethod
+    def save_to_memento(self):
+        pass
+
+    @abstractmethod
+    def restore_from_memento(self,memento):
+        pass
+
+    

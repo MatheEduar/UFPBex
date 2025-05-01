@@ -24,7 +24,7 @@ class CursoValidation:
     def validate_codigo(self, codigo):
         if not codigo:
             raise DataException("Entrada inválida. O código do curso não pode estar vazio!")
-        if not re.match(r'^[/d]{2,10}$', codigo):
+        if not re.match(r'^[\d]{2,10}$', codigo):
             raise DataException("Entrada inválida. O código do curso deve ter entre 2 e 10 caracteres numéricos!")
 
     def validate_area(self, area):

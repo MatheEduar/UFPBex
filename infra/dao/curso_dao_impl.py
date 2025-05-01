@@ -1,6 +1,8 @@
 from infra.dao.curso_dao import CursoDAO
 from business.model.curso_builder import CursoBuilder
 from business.service.cursoValidation import CursoValidation
+from infra.memento.cursosMemento import CursoMemento
+import copy
 
 class CursoDAOImpl(CursoDAO):
     def __init__(self, file_path="data/cursos.txt"):
@@ -76,3 +78,10 @@ class CursoDAOImpl(CursoDAO):
                 self._save_cursos()
                 return
         raise ValueError("Curso não encontrado")
+    
+    def save_to_memento(self):
+        return CursoMemento(copy.deepcopy(self.cursos))
+    
+    def restore_from_memento(self, memento):
+        self.cursos = memento.get_state()
+        self._save_cursos() 

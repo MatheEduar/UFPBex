@@ -2,6 +2,7 @@ from business.controllers.repository.facadeSingleton import FacadeSingleton
 from business.report import loggerAdapter
 from infra.error.dataException import DataException
 from business.service.notificadores import PrintObserver, LoggerObserver
+import datetime
 
 class ControllerCursos:
     def __init__(self):
@@ -38,3 +39,8 @@ class ControllerCursos:
     def deleteCurso(self, codigo):
         self.facade.delete_curso(codigo)
         self.log.info(f"Curso {codigo} deletado com sucesso!")
+
+    def undoAction(self):
+        self.facade.undoAction()
+        time = datetime.datetime.now()
+        self.log.info(f"Ação desfeita: {time}")

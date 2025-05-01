@@ -1,5 +1,5 @@
 from business.controllers.controllerCursos import ControllerCursos
-from business.commands.CursoCommands import AddCursoCommand, ShowCursoCommand, EditCursoCommand, ListAllCursosCommand, DeleteCursoCommand
+from business.commands.CursoCommands import AddCursoCommand, ShowCursoCommand, EditCursoCommand, ListAllCursosCommand, DeleteCursoCommand, UndoCommand
 
 class CursoForm:
     def __init__(self):
@@ -10,18 +10,20 @@ class CursoForm:
             3: ListAllCursosCommand.ListAllCursosCommand(controller),
             4: EditCursoCommand.EditCursoCommand(controller),
             5: ShowCursoCommand.ShowCursoCommand(controller),
+            6: UndoCommand.UndoCursoCommand(controller)
         }
 
     def menu(self):
         opcao = 0
-        while opcao != 6:
+        while opcao != 7:
             opcao = int(input('''===== UFPBex - Cursos =====\n
 1) Cadastrar Curso.
 2) Deletar Curso.
 3) Listar todos os Cursos.
 4) Editar Curso.
 5) Buscar Curso.
-6) Sair do menu de cursos.\n
+6) Desfazer última ação                              
+7) Sair do menu de cursos.\n
 > '''))
             if opcao in self.commands:
                 self.commands[opcao].execute()
