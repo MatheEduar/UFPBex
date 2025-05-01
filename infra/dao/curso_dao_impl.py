@@ -1,6 +1,5 @@
 from infra.dao.curso_dao import CursoDAO
 from business.model.curso_builder import CursoBuilder
-from business.service.curso_validation import CursoValidation
 from infra.memento.cursos_memento import CursoMemento
 import copy
 import json
@@ -9,7 +8,6 @@ class CursoDAOImpl(CursoDAO):
     def __init__(self, file_path="data/cursos.json"):
         self.file_path = file_path
         self.cursos = self._load_cursos()
-        self.validarCurso = CursoValidation()
 
     def _load_cursos(self):
         try:
@@ -50,15 +48,6 @@ class CursoDAOImpl(CursoDAO):
         return self.cursos
 
     def create_curso(self, curso):
-        self.validarCurso.validate_nome(curso.nome)
-        self.validarCurso.validate_carga_horaria_total(curso.cargaHorariatotal)
-        self.validarCurso.validate_codigo(curso.codigo)
-        self.validarCurso.validate_area(curso.area)
-        self.validarCurso.validate_periodos(curso.periodos)
-        self.validarCurso.validate_carga_horaria_optativa(curso.cargaHorariaOptativa)
-        self.validarCurso.validate_carga_horaria_minima(curso.cargaHorariaMinima)
-        self.validarCurso.validate_carga_horaria_maxima(curso.cargaHorariaMaxima)
-        self.validarCurso.validate_qtd_favoritos(curso.qtdFavoritos)
         self.cursos.append(curso)
         self._save_cursos()
 

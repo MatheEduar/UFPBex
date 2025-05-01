@@ -1,13 +1,11 @@
 from infra.dao.user_dao import UserDAO
 from business.model.user import User
-from business.service.user_validation import UserValidation
 import json
 
 class UserDAOImpl(UserDAO):
     def __init__(self, file_path="data/users.json"):
         self.file_path = file_path
         self.users = self._load_users()
-        self.validarUsuario = UserValidation()
 
     def _load_users(self):
         try:
@@ -35,8 +33,6 @@ class UserDAOImpl(UserDAO):
         return self.users
 
     def create_user(self, user):
-        self.validarUsuario.validateUserName(user.username)
-        self.validarUsuario.validatePassword(user.password)
         self.users.append(user)
         self._save_users()
 

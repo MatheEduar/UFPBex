@@ -9,5 +9,16 @@
         "cargaHorariaMinima": 1,
         "cargaHorariaMaxima": 1,
         "qtdFavoritos": 1
+    },
+    "321": {
+        "nome": "BuchaMor",
+        "codigo": "321",
+        "area": "2",
+        "periodos": 2,
+        "cargaHorariatotal": 2,
+        "cargaHorariaOptativa": 2,
+        "cargaHorariaMinima": 2,
+        "cargaHorariaMaxima": 2,
+        "qtdFavoritos": 2
     }
 }

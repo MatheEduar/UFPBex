@@ -2,15 +2,23 @@ from business.controllers.repository.facade_singleton import FacadeSingleton
 from business.report import logger_adapter
 from infra.error.exception_user import ExceptionUser
 from infra.error.exception_password import ExceptionPassword
+from business.service.user_validation import UserValidation
+import bcrypt
 
 class ControllerUsers:
     def __init__(self):
         self.facade = FacadeSingleton()
         self.log = logger_adapter.LoggerAdapter(use_print=True)
+        self.validar_usuario = UserValidation()
       
     def add(self, username, password):
         try:
-            self.facade.add_user(username, password)
+            self.validar_usuario.validateUserName(username)
+            self.validar_usuario.validatePassword(password)
+
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+            self.facade.add_user(username, hashed_password.decode('utf-8'))
             self.log.info(f"Usuário {username} adicionado com sucesso!")
         except ExceptionUser as e:
             print(f"Erro ao cadastrar usuário: {e}")

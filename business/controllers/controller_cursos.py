@@ -3,6 +3,7 @@ from business.report import logger_adapter
 from infra.error.data_exception import DataException
 from business.service.notificadores import PrintObserver, LoggerObserver
 import datetime
+from business.service.curso_validation import CursoValidation
 
 class ControllerCursos:
     def __init__(self):
@@ -10,6 +11,7 @@ class ControllerCursos:
         self.log = logger_adapter.LoggerAdapter(use_print=True)
         self.observerLog = LoggerObserver()
         self.observerPrint = PrintObserver()
+        self.validarCurso = CursoValidation()
 
     def cursoObservers(self, codigo):
         curso_atual = self.facade.get_curso(codigo)
@@ -21,6 +23,17 @@ class ControllerCursos:
 
     def add(self, nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito):
         try:
+
+            self.validarCurso.validate_nome(nome)
+            self.validarCurso.validate_carga_horaria_total(carga_horaria_total)
+            self.validarCurso.validate_codigo(codigo)
+            self.validarCurso.validate_area(area)
+            self.validarCurso.validate_periodos(periodos)
+            self.validarCurso.validate_carga_horaria_optativa(carga_horaria_optativa)
+            self.validarCurso.validate_carga_horaria_minima(carga_horaria_minima)
+            self.validarCurso.validate_carga_horaria_maxima(carga_horaria_maxima)
+            self.validarCurso.validate_qtd_favoritos(qtd_favorito)
+
             self.facade.add_curso(nome, codigo, area, periodos, carga_horaria_total, carga_horaria_optativa, carga_horaria_minima, carga_horaria_maxima, qtd_favorito)
             curso_atual = self.cursoObservers(codigo)
             curso_atual.notificar_observadores(f"Curso {curso_atual.nome} foi adicionado!")

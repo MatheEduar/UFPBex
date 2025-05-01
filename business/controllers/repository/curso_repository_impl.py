@@ -1,5 +1,4 @@
 from infra.dao.curso_dao_impl import CursoDAOImpl
-from business.service.curso_validation import CursoValidation
 from business.controllers.repository.curso_repository import CursoRepository
 from infra.memento.cursos_caretaker import CursoCaretaker  
 
@@ -7,7 +6,6 @@ class CursoRepositoryImpl(CursoRepository):
     def __init__(self):  
         self.dao = CursoDAOImpl()
         self.caretaker = CursoCaretaker(self.dao)
-        self.validtaion = CursoValidation()
 
     def get_curso_by_codigo(self, codigo):
         return self.dao.get_curso_by_codigo(codigo)
