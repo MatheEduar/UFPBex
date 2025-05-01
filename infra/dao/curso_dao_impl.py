@@ -3,43 +3,42 @@ from business.model.curso_builder import CursoBuilder
 from business.service.curso_validation import CursoValidation
 from infra.memento.cursos_memento import CursoMemento
 import copy
+import json
 
 class CursoDAOImpl(CursoDAO):
-    def __init__(self, file_path="data/cursos.txt"):
+    def __init__(self, file_path="data/cursos.json"):
         self.file_path = file_path
         self.cursos = self._load_cursos()
         self.validarCurso = CursoValidation()
 
     def _load_cursos(self):
         try:
-            with open(self.file_path, 'r') as file:
-                data_list = [line.strip().split(',') for line in file]
+            with open(self.file_path, 'r', encoding='utf-8') as file:
+                data_dict = json.load(file)
                 cursos = [
                     CursoBuilder()
-                        .com_nome(nome)
-                        .com_codigo(codigo)
-                        .com_area(area)
-                        .com_periodos(int(periodos))
-                        .com_carga_total(int(cargaHorariatotal))
-                        .com_carga_optativa(int(carga_horaria_optativa))
-                        .com_carga_minima(int(carga_horaria_minima))
-                        .com_carga_maxima(int(carga_horaria_maxima))
-                        .com_qtd_favoritos(int(qtd_favorito))
+                        .com_nome(d['nome'])
+                        .com_codigo(d['codigo'])
+                        .com_area(d['area'])
+                        .com_periodos(d['periodos'])
+                        .com_carga_total(d['cargaHorariatotal'])
+                        .com_carga_optativa(d['cargaHorariaOptativa'])
+                        .com_carga_minima(d['cargaHorariaMinima'])
+                        .com_carga_maxima(d['cargaHorariaMaxima'])
+                        .com_qtd_favoritos(d['qtdFavoritos'])
                         .construir()
-                    for nome, codigo, area, periodos, cargaHorariatotal,
-                        carga_horaria_optativa, carga_horaria_minima,
-                        carga_horaria_maxima, qtd_favorito in data_list
+                    for d in data_dict.values()
                 ]
                 return cursos
-            
         except FileNotFoundError:
             return []
 
 
     def _save_cursos(self):
-        with open(self.file_path, 'w') as file:
-            for curso in self.cursos:
-                file.write(f"{curso.nome},{curso.codigo},{curso.area},{curso.periodos},{curso.cargaHorariatotal},{curso.cargaHorariaOptativa},{curso.cargaHorariaMinima},{curso.cargaHorariaMaxima},{curso.qtdFavoritos}\n")
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            data_dict = {curso.codigo: curso.to_dict() for curso in self.cursos}
+            json.dump(data_dict, file, indent=4)
+
 
     def get_curso_by_codigo(self, codigo):
         for curso in self.cursos:

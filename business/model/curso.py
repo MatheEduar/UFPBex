@@ -12,6 +12,19 @@ class Curso:
 
         self._observadores = []
 
+    def to_dict(self):
+        return {
+            "nome": self.nome,
+            "codigo": self.codigo,
+            "area": self.area,
+            "periodos": self.periodos,
+            "cargaHorariatotal": self.cargaHorariatotal,
+            "cargaHorariaOptativa": self.cargaHorariaOptativa,
+            "cargaHorariaMinima": self.cargaHorariaMinima,
+            "cargaHorariaMaxima": self.cargaHorariaMaxima,
+            "qtdFavoritos": self.qtdFavoritos
+        }
+
     def adicionar_observador(self, observador):
         if observador not in self._observadores:
             self._observadores.append(observador)

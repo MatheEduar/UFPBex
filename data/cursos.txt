@@ -1,3 +1,0 @@
-CursoSuperBucha,1234,Essa,8,255,255,255,255,0
-CursoPoggers,12345,Aquela,8,255,255,255,255,0
-CursoMaisOuMenos,123,Essa,8,255,255,255,255,0

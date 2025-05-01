@@ -1,0 +1,13 @@
+{
+    "123": {
+        "nome": "Bucha",
+        "codigo": "123",
+        "area": "1",
+        "periodos": 1,
+        "cargaHorariatotal": 1,
+        "cargaHorariaOptativa": 1,
+        "cargaHorariaMinima": 1,
+        "cargaHorariaMaxima": 1,
+        "qtdFavoritos": 1
+    }
+}

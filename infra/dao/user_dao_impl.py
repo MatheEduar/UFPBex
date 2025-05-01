@@ -1,26 +1,29 @@
 from infra.dao.user_dao import UserDAO
 from business.model.user import User
 from business.service.user_validation import UserValidation
+import json
 
 class UserDAOImpl(UserDAO):
-    def __init__(self, file_path="data/users.txt"):
+    def __init__(self, file_path="data/users.json"):
         self.file_path = file_path
         self.users = self._load_users()
         self.validarUsuario = UserValidation()
 
     def _load_users(self):
         try:
-            with open(self.file_path, 'r') as file:
-                data_list = [line.strip().split() for line in file]
-                users = [User(username, password) for username, password in data_list]
+            with open(self.file_path, 'r', encoding='utf-8') as file:
+                data_dict = json.load(file)
+                users = [User(username, password) for username, password in data_dict.items()]
                 return users
         except FileNotFoundError:
-            return []  
+            return []
+        except json.JSONDecodeError:
+            return []
 
     def _save_users(self):
-        with open(self.file_path, 'w') as file:
-            for user in self.users:
-                file.write(f"{user.username} {user.password}\n")
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            data_dict = {user.username: user.password for user in self.users}
+            json.dump(data_dict, file, indent=4)
 
     def get_user_by_username(self, username):
         for user in self.users:
